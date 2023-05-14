@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% load static %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/mdb.min.js' %}"></script>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="{% static 'css/mdb.min.css'%}">
+        <!-- Your custom styles (optional) -->
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+    <title>EnergyManagementSystem</title>
+</head>
+<style>
+
+    .send{
+        margin-left: 40%;
+        margin-right: 40%;
+        margin-top: 10%;
+    }
+    .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        margin-top: 10%;
+        margin-left: 25%;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+<body>
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark danger-color">
+      <a class="navbar-brand" href="/">EnergyManagementSystem</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+        aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+        {% if log %}
+{#        <ul class="navbar-nav mr-auto">#}
+{#          <li class="nav-item">#}
+{#            <a class="nav-link" href="/#">Что-то делать</a>#}
+{#          </li>#}
+{#        </ul>#}
+        {% endif %}
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            {% if log %}
+            {% csrf_token %}
+            <span class="navbar-text white-text">
+                {{log}}
+            </span>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-default"
+              aria-labelledby="navbarDropdownMenuLink-333">
+              <a class="dropdown-item" href="/logout/">Выйти</a>
+            </div>
+          </li>
+            {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/sign/">Зарегистрируйтесь</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login/">Войдите</a>
+          </li>
+            {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <!--/.Navbar -->
+
+    {% if log %}
+    <div class="send" id="322">
+        <h5>Модель вашей энергосистемы не обнаружена. Происходит доубучение.</h5>
+        <div class="loader"></div>
+    </div>
+
+    <script type="text/javascript">
+    setTimeout(function(){ window.location.href = "/"; }, 5 * 1000);
+    </script>
+
+    {% else %}
+        <figure>
+            <h3>Войдите или зарегистрируйтесь</h3>
+            <img src="https://energo-audit.com/wp-content/uploads/2020/05/elektro-2.png">
+        </figure>
+    {% endif %}
+
+    <footer class="page-footer font-small danger-color fixed-bottom">
+        <div class="footer-copyright text-center py-3">© 2023 Copyright:
+            <a href="/#"> EnergyManagementSystem.com</a>
+        </div>
+    </footer>
+</body>
+
+
+
+
+
+</html>
